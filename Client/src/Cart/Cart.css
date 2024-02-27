@@ -1,0 +1,121 @@
+.carti {
+    background-image: url("../images/wishlist.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    
+}
+.carti a{
+    color: #EB3E32;;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.qty button{
+    border: 0;
+    background: transparent;
+}
+.qty{
+    border: 2px solid grey;
+    padding: 8px;
+        border-radius: 10px;
+}
+.sho button{
+    height: 64px;
+    width: 217px;
+    background-color: #EB3E32;
+    border: 0;
+    color: white;
+    font-weight: 600;
+    margin-top: 20px;
+}
+.sho button:hover{
+    background-color: white;
+    border: 2px solid #EB3E32;
+    color: #EB3E32;
+    transition: all 0.3s linear;
+}
+.updatecart{
+    background-color: black;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 15px;
+}
+.updatecart:hover{
+    background-color:#EB3E32;
+    transition: all 0.3s linear;
+}
+.updatecart1{
+    background-color: transparent;
+    color: black;
+    font-weight: 500;
+    border: 2px solid grey;
+    padding: 12px;
+    border-radius: 10px;
+}
+.updatecart1:hover{
+    background-color: black;
+    color: white;
+    font-weight: 500;
+   transition: all 0.3s linear;
+}
+.coupon input {
+    width: 100%;
+    height: 50px;
+}
+.coupon a{
+    color: black;
+    
+}
+.coupon a:hover{
+    color: #EB3E32;
+    transition: all 0.2s linear;
+}
+
+.cardtotal ul{
+        list-style: none;
+}
+
+.checkout button{
+        width: 100%;
+        background-color: black;
+        color: white;
+        height: 60px;
+        border: 0;
+}
+.checkout button:hover{
+            transition: all 0.3s linear;
+        background-color: #EB3E32;
+        
+        
+}
+.upcart a{
+    color: black;
+    
+}
+.upcart a:hover{
+    color: #EB3E32;
+    transition: all 0.2s linear;
+}
+
+
+/* .tab table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tab table td, th {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ccc; */
+  
+  /* @media (max-width: 600px) {
+   .tab table th, td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  } */

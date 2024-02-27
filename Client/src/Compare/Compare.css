@@ -1,0 +1,59 @@
+.comet{
+        background-image: url("../images/about.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+        height: auto;
+    
+    }
+    .comet h1{
+        color: black;
+    }
+    .comet a{
+        font-size: 1.3rem;
+        text-decoration: none;
+        color: #EB3E32
+    }
+.com img{
+        aspect-ratio: 3/2;
+        object-fit: contain;
+        height: auto;
+}
+
+
+.btnc button{
+        border: 0;
+        border-radius: 25px;
+       height: 40px;
+       width: 100px;
+        background-color: #343538;
+        color: white;
+}
+.sto{
+        border: 0;
+        border-radius: 25px;
+        padding-left: 15px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 15px;
+        background-color: #35D56A;
+        color: white;
+}
+
+/* @media only screen and (max-width: 770px) {
+    
+        .btnc button{
+                        width: 70%;
+                        height: auto;
+                        font-size: 10px;
+               
+        }
+        .com td {
+                font-size: 12px;
+                padding: 8px;
+        }
+        
+    } */
+    
+
+   

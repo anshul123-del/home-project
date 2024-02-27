@@ -1,0 +1,55 @@
+.logb{
+    background-image: url("../images/about.jpg");
+    background-repeat: no-repeat;
+    background-attachment:scroll;
+    background-size: 100%;
+    height: auto;
+}
+.logb h1{
+    color: black;
+    text-align: center;
+}
+.logb a{
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #EB3E32
+}
+
+.log{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: grey;
+}
+
+.logi{
+    text-align: center;
+}
+.log input{
+    padding:15px;
+}
+.logi button{
+    background-color: #333131;
+    border: 0;
+    width: 80%;
+    height: 60px;
+    font-weight: 500;
+    color: white;
+
+}
+.logi button:hover{
+    background-color: #EB3E32;
+    transition: all 0.2s linear;
+}
+.reg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: grey;
+
+}
+.reg input{
+    padding: 15px;
+}

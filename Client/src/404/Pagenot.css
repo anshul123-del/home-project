@@ -1,0 +1,43 @@
+.for{
+    font-size:7rem ;
+    color: #EB3E32;
+}
+.fond{
+    font-weight: bol;
+
+}
+.page4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.navi{
+   padding-top: 18px;
+   padding-bottom: 18px;
+   padding-right: 30px;
+   padding-left: 30px;
+   border: 2px solid #EB3E32;
+   color: #EB3E32;
+   font-weight: 500;
+
+}
+@media only screen and (max-width: 300px) {
+    .navi{padding-top: 10px;
+   padding-bottom: 10px;
+   padding-right: 10px;
+   padding-left: 10px;
+    }
+}
+@media only screen and (max-width: 150px) {
+    .navi{padding-top: 0px;
+   padding-bottom: 0px;
+   padding-right: 0px;
+   padding-left: 0px;
+    }
+}
+.navi:hover{
+    background-color: #EB3E32;
+    color: white;
+    transition: all 0.3s linear;
+}
