@@ -38,6 +38,8 @@ import Admin from "./Dashboard/Admin";
 import AdminDashboard from "./Dashboard/AdminDashboard";
 import Allusers from "./Dashboard/Allusers";
 import CreateProduct from "./Dashboard/CreateProduct";
+import Success from "./Checkout/Success";
+import Cancel from "./Checkout/Cancel";
 // import Addtocart from "./Cart/Addtocart";
 // import Productlisting from "./Product/Productlisting";
 function App() {
@@ -62,6 +64,8 @@ function App() {
           <Route path="/compare" element={<Compare />}></Route>
           <Route path="/pagenotfound" element={<Pagenot />}></Route>
           <Route path="/singlepro/:_id" element={<Singleproduct />}></Route>
+          <Route path="/success" element={<Success />}></Route>
+          <Route path="/cancel" element={<Cancel />}></Route>
 
           {/* Account Section */}
           <Route path="/account" element={<Account />}>

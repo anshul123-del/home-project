@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import { FaExclamation } from "react-icons/fa";
@@ -8,14 +8,27 @@ import "./Check.css";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { loadStripe } from '@stripe/stripe-js';
 import { Button, FloatingLabel, Table } from "react-bootstrap";
+import { CartContext } from "../Context/CartContext";
+import axios from "axios";
 const Checkout = () => {
-    const HandleOrder =(num)=>{
-      console.log(num);
-    }
+  const { carti } = useContext(CartContext)
+
+  //Total
+  const [total, settotal] = useState(); //total
+  useEffect(() => {
+    settotal(
+      carti.reduce((acc, crr) => {
+        return acc + Number(crr.price);
+      }, 0)
+    );
+  }, [carti]);
+  const HandleOrder = (num) => {
+    console.log(num);
+  }
   function CustomToggle({ children, eventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey);
-
     return (
       <button
         className="acc"
@@ -27,26 +40,74 @@ const Checkout = () => {
       </button>
     );
   }
-  const[check,setcheck] = useState({
-        fname:"",
-        lname:"",
-        company:"",
-        country:"Choose...",
-        Address:"",
-        city:"",
-        district:"Choose...",
-        zip_code:"",
-        phone_no:"",
-        email:""
+
+
+  // Login
+  const [userl, setuserl] = useState({
+    email: "",
+    password: ""
   })
-      const handlechange = (e)=>{
-          const{value,name} = e.target
-          setcheck({...check,[name]:value})
-      }
-      const handlesubmit = (e)=>{
-        e.preventDefault()
-        console.log(check)
-      }
+
+  const handlelog = (e) => {
+    const { value, name } = e.target
+    setuserl({ ...userl, [name]: value })
+  }
+  const handlesubmitlog = async (e) => {
+    e.preventDefault()
+    const res = await axios.post(`http://localhost:8050/log`, userl)
+  }
+
+
+  const [check, setcheck] = useState({
+    fname: "",
+    lname: "",
+    company: "",
+    country: "Choose...",
+    Address: "",
+    city: "",
+    district: "Choose...",
+    zip_code: "",
+    phone_no: "",
+    email: ""
+  })
+  const handlechange = (e) => {
+    const { value, name } = e.target
+    setcheck({ ...check, [name]: value })
+  }
+  const handlesubmit = (e) => {
+    e.preventDefault()
+    console.log(check)
+  }
+
+  //MAkepayment
+  const makepayment = async () => {
+    const stripe = await loadStripe("pk_test_51OoTquSAtmHNt30iXuDuORAM20i3SVKdHGqc0ponW9d7g9weAvmAC4msaosXy3rCkWlwwVVJ6lmd6dov74NpvMiN00QRp94M72");
+    const body = {
+        products: carti
+    };
+    try {
+        const response = await axios.post('http://localhost:8050/create-checkout-session', body, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const sessionId = response.data.id;
+
+        const result = await stripe.redirectToCheckout({
+            sessionId: sessionId,
+        });
+
+        // Check for errors during redirection
+        if (result.error) {
+            console.error(result.error.message);
+        }
+    } catch (error) {
+        console.error("Error creating Checkout session:", error);
+    }
+  }
+
+  
   return (
     <>
       <div className="container-fluid wisht text-center p-5">
@@ -78,17 +139,17 @@ const Checkout = () => {
                       </p>
                     </div>
 
-                    <Form >
+                    <Form onSubmit={handlesubmitlog}>
                       <div className="row">
                         <div className="col-lg-6 col-md-12">
                           <Form.Label>Username or Email address</Form.Label>
 
-                          <Form.Control type="text" />
-                          </div>
+                          <Form.Control type="email" value={userl.email} name="email" onChange={handlelog} />
+                        </div>
                         <div className="col-lg-6 col-md-6">
                           <Form.Label>Password</Form.Label>
 
-                          <Form.Control type="text" placeholder="Last name" />
+                          <Form.Control type="text" placeholder="password" value={userl.password} name="password" onChange={handlelog} />
                         </div>
                       </div>
                       <button type="submit" className="my-3 shop">
@@ -169,7 +230,7 @@ const Checkout = () => {
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
-                  <Form.Select  value={check.country} name="country" onChange={handlechange}>
+                  <Form.Select value={check.country} name="country" onChange={handlechange}>
                     <option>Bangladesh</option>
                     <option>India</option>
                     <option>America</option>
@@ -190,14 +251,14 @@ const Checkout = () => {
                   />
                 </Form.Group>
                 <Form.Group className="my-3" controlId="formGridAddress1">
-                  <Form.Label>Town/City</Form.Label> 
+                  <Form.Label>Town/City</Form.Label>
                   <Form.Control type="text" value={check.city} name="city" onChange={handlechange} />
                 </Form.Group>
 
                 {/* District */}
                 <Form.Group controlId="formGridState">
                   <Form.Label>District</Form.Label>
-                  <Form.Select  value={check.district} name="district" onChange={handlechange}>
+                  <Form.Select value={check.district} name="district" onChange={handlechange}>
                     <option>Faridabad</option>
                     <option>India</option>
                     <option>America</option>
@@ -214,7 +275,7 @@ const Checkout = () => {
 
                 <Form.Group className="my-3" controlId="formGridAddress1">
                   <Form.Label>Phone(Optional)</Form.Label>
-                  <Form.Control autoComplete="off" type="text" value={check.phone_no} name="phone_no" onChange={handlechange}/>
+                  <Form.Control autoComplete="off" type="text" value={check.phone_no} name="phone_no" onChange={handlechange} />
                 </Form.Group>
 
                 <Form.Group className="my-3" controlId="formGridAddress1">
@@ -264,19 +325,23 @@ const Checkout = () => {
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td>Satin Gown *1</td>
-                        <td>69.9</td>
-                      </tr>
-                      <tr>
-                        <td>printed Cotton</td>
-                        <td>79.9</td>
-                      </tr>
+                      {
+                        carti.map((ele) => {
+                          return (
+                            <>
+                              <tr>
+                                <td>{ele.slug}</td>
+                                <td>&#36;{ele.price}</td>
+                              </tr>
+                            </>
+                          )
+                        })
+                      }
                     </tbody>
                     <tfoot>
                       <tr>
                         <td>subtotal</td>
-                        <td>8522</td>
+                        <td>&#36;{total}</td>
                       </tr>
                       <tr>
                         <td>Shipping</td>
@@ -284,102 +349,104 @@ const Checkout = () => {
                       </tr>
                       <tr>
                         <td>Total</td>
-                        <td>89.00</td>
+                        <td>&#36;{total}</td>
                       </tr>
                     </tfoot>
                   </Table>
 
                   {/* ACC */}
                   <div className="ACC">
-                  <Accordion defaultActiveKey="0">
-                    <Card.Header>
-                      <CustomToggle eventKey="0">
-                        {" "}
-                        <Form.Group>
-                          <Form.Check
-                            inline
-                            label="DIRECT BANK"
-                            name="group1"
-                            type="radio"
-                          />
-                        </Form.Group>
-                      </CustomToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="0">
-                      <Card.Body>
-                        <p>
-                        Make your payment directly into our bank account. Please
-                        use your Order ID as the payment reference. Your order
-                        will not be shipped until the funds have cleared in our
-                        account
-                        </p>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Accordion>
+                    <Accordion defaultActiveKey="0">
+                      <Card.Header>
+                        <CustomToggle eventKey="0">
+                          {" "}
+                          <Form.Group>
+                            <Form.Check
+                              inline
+                              label="DIRECT BANK"
+                              name="group1"
+                              type="radio"
+                            />
+                          </Form.Group>
+                        </CustomToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                          <p>
+                            Make your payment directly into our bank account. Please
+                            use your Order ID as the payment reference. Your order
+                            will not be shipped until the funds have cleared in our
+                            account
+                          </p>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Accordion>
 
-                  {/* 2nd */}
-                  <Accordion>
-                    <Card.Header>
-                      <CustomToggle eventKey="1">
-                        <Form.Group>
-                          <Form.Check
-                            inline
-                            label="CHECK PAYMENTS"
-                            name="group1"
-                            type="radio"
-                          />
-                        </Form.Group>
-                      </CustomToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="1">
-                      <Card.Body>
-                       <p> Please send a check to Store Name, Store Street, Store
-                        Town, Store State / County, Store Postcode.
-                        </p>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Accordion>
+                    {/* 2nd */}
+                    <Accordion>
+                      <Card.Header>
+                        <CustomToggle eventKey="1">
+                          <Form.Group>
+                            <Form.Check
+                              inline
+                              label="CHECK PAYMENTS"
+                              name="group1"
+                              type="radio"
+                            />
+                          </Form.Group>
+                        </CustomToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="1">
+                        <Card.Body>
+                          <p> Please send a check to Store Name, Store Street, Store
+                            Town, Store State / County, Store Postcode.
+                          </p>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Accordion>
 
-                  <Accordion>
-                    <Card.Header>
-                      <CustomToggle eventKey="2">
-                        <Form.Group>
-                          <Form.Check
-                            inline
-                            label="CASH ON DELIVERY"
-                            name="group1"
-                            type="radio"
-                          />
-                        </Form.Group>
-                      </CustomToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="2">
-                      <Card.Body><p>Pay with cash upon delivery</p></Card.Body>
-                    </Accordion.Collapse>
-                  </Accordion>
+                    <Accordion>
+                      <Card.Header>
+                        <CustomToggle eventKey="2">
+                          <Form.Group>
+                            <Form.Check
+                              inline
+                              label="CASH ON DELIVERY"
+                              name="group1"
+                              type="radio"
+                            />
+                          </Form.Group>
+                        </CustomToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="2">
+                        <Card.Body><p>Pay with cash upon delivery</p></Card.Body>
+                      </Accordion.Collapse>
+                    </Accordion>
 
-                  <Accordion>
-                    <Card.Header>
-                      <CustomToggle eventKey="3">
-                        {" "}
-                        <Form.Group>
-                          <Form.Check
-                            inline
-                            label="PAYPAL EXPRESS CHECKOUT  "
-                            name="group1"
-                            type="radio"
-                          />
-                        </Form.Group>
-                      </CustomToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="3">
-                      <Card.Body>
-                        <p>Pay via PayPal; you can pay with your credit card if you
-                        don’t have a PayPal account.
-                        </p>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Accordion>
+                    <Accordion>
+                      <Card.Header>
+                        <CustomToggle eventKey="3">
+                          {" "}
+                          <Form.Group>
+                            <Form.Check
+                              inline
+                              label="PAYPAL EXPRESS CHECKOUT  "
+                              name="group1"
+                              type="radio"
+                            />
+                          </Form.Group>
+                        </CustomToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="3">
+                        <Card.Body>
+                          <p>Pay via PayPal; you can pay with your credit card if you
+                            don’t have a PayPal account.
+                          </p>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Accordion>
+                    {/* //StripeCheckout */}
+
                   </div>
                   {/* Bank-section-end */}
                   <div className="my-4">
@@ -396,12 +463,14 @@ const Checkout = () => {
                           label="I have read and agree to the websites terms and conditions *"
                         />
                       </Form.Group>
-                  
-                    <div className="logg col-12  mt-4">
-                      <Button onClick={()=>{
-                        HandleOrder(check)
-                      }}>PLACE ORDER</Button>
-                    </div>
+
+                      <div className="logg col-12  mt-4">
+                        <Button onClick={() => {
+                          // HandleOrder(check),
+                          makepayment()
+
+                        }}>PLACE ORDER</Button>
+                      </div>
                     </Form>
                   </div>
                 </div>

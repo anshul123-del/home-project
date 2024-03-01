@@ -5,6 +5,7 @@ const upload = require("../middleware/multer_middileware")
 
 const { Authverification, isadmin } = require('../middleware/Auth');
 const ordercontroller = require("../Controller/OrderController");
+const PaymentController = require("../Controller/Paymentcontroller");
 const route = require("express").Router();
 
 //User Route
@@ -31,5 +32,10 @@ route.post("/delcart/", cartcontroller.deletecart)
 
 //Order Route
 route.post("/order",ordercontroller.addorder)
+
+
+
+//Payment route
+route.post("/create-checkout-session",PaymentController.makepayment)
 
 module.exports = route;

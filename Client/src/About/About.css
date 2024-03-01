@@ -475,3 +475,26 @@
         padding: 10px 30px;
     }
 }
+
+.reap{
+    animation: backfro 700ms;
+}
+.front{
+    animation: frontfro 800ms;
+}
+@keyframes backfro {
+        0%{
+            transform: translateX(-100%);
+        }
+        100%{
+            transform: translateX(0%);
+        }
+}   
+@keyframes frontfro {
+        0%{
+            transform: translateX(100%);
+        }
+        100%{
+            transform: translateX(0%);
+        }
+}   

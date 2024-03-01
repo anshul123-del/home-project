@@ -15,7 +15,7 @@ const FeaturedItems = () => {
       const { _id } = ele
       return (
 
-        <div className="col-lg-3 col-md-4 col-sm-6" key={ele.id}>
+        <div className="col-lg-3 col-md-4 col-sm-6" key={ele._id}>
           <Link to={`/singlepro/${_id}`}>
             {" "}
             <Card className="align-items-center p-2">

@@ -61,7 +61,7 @@ const Seearch = () => {
         <div className="container my-4">
           <div className="row">
             <div className="col-lg-4 col-sm-6 text-center">
-              <h1 style={{ fontWeight: "bolder" }}>Shome</h1>
+            <Link to="/" style={{textDecoration:"none"}}><h1 style={{ fontWeight: "bolder",color:"black"}}>Shome</h1></Link> 
             </div>
             <div className="col-lg-4 ser">
               <form className="d-flex " role="search" onSubmit={handlesubmit}>

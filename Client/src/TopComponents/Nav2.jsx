@@ -50,7 +50,7 @@ const Nav2 = () => {
         <div className="container my-4">
           <div className="d-flex  justify-content-between flex-wrap">
             <div className=" text-start">
-              <h1 style={{ fontWeight: "bolder" }}>Shome</h1>
+            <Link to="/" style={{textDecoration:"none"}}><h1 style={{ fontWeight: "bolder",color:"black"}}>Shome</h1></Link> 
             </div>
 
             <div className="  wishlist text-center">

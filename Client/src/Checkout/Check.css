@@ -1,3 +1,4 @@
+
 .checko {
     background-image: url("../images/wishlist.jpg");
     background-repeat: no-repeat;
@@ -86,4 +87,50 @@
 .ACC p{
     font-size: 14px; 
     color: grey;
+}
+.succ{
+    animation: sucess 300ms;
+}
+.cans{
+    animation: crux 300ms;
+}
+@keyframes sucess{
+    0%{
+        transform: translatey(-100%);
+    }
+    100%{
+        transform: translatey(0);
+
+    }
+}
+.can{
+    position: relative;
+}
+.cans{
+    position: absolute;
+    animation: sucess 300ms ease-in;
+    z-index: 100;
+}
+
+@keyframes crux{
+    0%{
+        transform: translatey(-100%);
+    }
+    100%{
+        transform: translatey(0);
+
+    }
+}
+.gt{
+    animation: opac 1s ease-in 5s  infinite ;
+}
+@keyframes opac{
+    0%{
+        opacity: 0;
+       
+    }
+    100%{
+        opacity: 100;
+        
+    }
 }

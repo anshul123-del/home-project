@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Order = require("../Models/Order")
 const ordercontroller = {
   addorder: async (req, res) => {

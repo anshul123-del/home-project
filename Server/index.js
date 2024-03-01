@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require("cors")
 const mongoose = require("mongoose")
 const route = require("./routes/Routes")
+app.use(express.static('public'));
 const dotenv = require("dotenv").config()
 const port = process.env.port || 8002
 const dburl = process.env.dburl

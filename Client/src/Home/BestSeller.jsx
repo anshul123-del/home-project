@@ -11,7 +11,7 @@ const BestSeller = () => {
 
   const data = feat.map((ele) => {
     return (
-      <div className="col-lg-3 col-md-6 col-sm-2 text-start" key={ele.id}>
+      <div className="col-lg-3 col-md-6 col-sm-2 text-start" key={ele._id}>
         <Link>
           {" "}
           <Card

@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <div className="container-fluid padd-2 mar-top-bottom">
       <div className="row">
-        <div className="col-lg-9 col-md-12">
+        <div className="col-lg-9 col-md-12 reap">
           <div className="shadow-2">
             <h1 className="head-top">We Are Here! <br/>Please Send A Quest</h1>
             <Form>
@@ -35,14 +35,14 @@ const Contact = () => {
         <Form.Control as="textarea" rows={13}  placeholder="Message"/>
       </Form.Group>
                 </div>
-                <div className="col-3">
+                <div className="col-3 front">
                 <Button className="buttton-cl">Send Message</Button>
                 </div>
               </div>
             </Form>
           </div>
         </div>
-        <div className="col-lg-3 col-md-12">
+        <div className="col-lg-3 col-md-12 front">
           <div>
             <div className="shadow-3 add-dis mt-4 ">
                 <div className="">
