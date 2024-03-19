@@ -23,6 +23,7 @@ const Shoecontextpro = ({ children }) => {
       getprod()
    },[])
 
+
   return <Shoecontext.Provider value={{feat,setfeature,product,setproduct}}>{children}</Shoecontext.Provider>
 };
 

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Form } from 'react-bootstrap'
 
 const Accountdetails = () => {
@@ -6,7 +7,7 @@ const Accountdetails = () => {
     <div className="row">
       <div className="col-sm-12">
         <div className="dashboard">
-        <Form className='padd'>
+        <Form className=''>
           <h4>Account details</h4>
           <hr/>
           <div className="row">

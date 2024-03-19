@@ -10,7 +10,9 @@ import { CartContext } from "../Context/CartContext";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { Shoecont } from "../Context/Context";
+import { Authcontext } from "../Context/AuthContext";
 const Productlist = () => {
+  const { auth } = useContext(Authcontext)
   const [data, setdata] = useState([]);
   const [viewdata, setviewdata] = useState(null);
   const navigate = useNavigate();
@@ -29,21 +31,21 @@ const Productlist = () => {
   };
   const { product } = Shoecont();
   const { carti, setcarti } = useContext(CartContext);
-  const[page,setpage] = useState(1)
-  const shoesdata = product.slice(page*10-10, page * 10)
+  const [page, setpage] = useState(1)
+  const shoesdata = product.slice(page * 10 - 10, page * 10)
     .map((item, ind) => {
-      const{_id} = item
+      const { _id } = item
       return (
         <>
           <div className="col-12 shadow mb-3 colt ">
             <div className="row">
               <div key={ind} className="cdi card-1 col-lg-4 col-md-6 my-4">
-              <Link to={`/singlepro/${_id}`}>  <img
+                <Link to={`/singlepro/${_id}`}>  <img
                   src={item.image}
                   class="card-img-top img-fluid img-bor"
                   style={{ height: "200px", width: "100%" }}
                 />
-</Link>
+                </Link>
                 <a
                   href="#"
                   className="card-2"
@@ -87,13 +89,15 @@ const Productlist = () => {
                 <button
                   className="list"
                   onClick={() => {
-                    setcarti(
-                      [...carti, item],
-                    );
-                    localStorage.setItem(
-                      "cart",
-                      JSON.stringify([...carti, item])
-                    )
+                    {
+                      auth?.user === null ? alert("login first") : setcarti(
+                        [...carti, item],
+                      );
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...carti, item])
+                      )
+                    }
                   }}
                 >
                   Add to Cart
@@ -123,7 +127,7 @@ const Productlist = () => {
             </span>
           ))}
           <span onClick={() => pageselect(page + 1)}>
-            
+
             <FaArrowRight />
           </span>
         </div>

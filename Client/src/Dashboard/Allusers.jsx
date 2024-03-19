@@ -11,19 +11,18 @@ const Allusers = () => {
     const { auth } = useContext(Authcontext)
     const { baseurl } = useContext(Authcontext)
     const [user, setuser] = useState([])
-
-    const token = auth?.user?.token
-    console.log(token)
+    console.log(auth)
+    const jwtToken = auth?.user?.jwtToken
 
 
     const getdata = async () => {
         try {
             const response = await axios.get(`http://localhost:8050/get`, {
                 headers: {
-                    "Authorization": `Bearer ${token}`, // Include "Bearer" before the token
-                },
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                }
             });
-            console.log(response);
             setuser(response.data.data);
         } catch (error) {
             console.error('API Request Error:', error);
@@ -34,18 +33,18 @@ const Allusers = () => {
     useEffect(() => {
         getdata();
     }, []);
-    console.log(user)
 
     const deleted = async (_id, inde) => {
-        const deldata = await axios.post(`${baseurl}/del`, _id, {
+        const deldata = await axios.post(`${baseurl}/del`, { _id }, {
             headers: {
-                "Authorization": `${token}`,
-            },
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwtToken}`
+            }
+
         })
-        const deleteupuser = user.filter((_, ind) => ind !== inde)
-        console.log(deleteupuser)
-        setuser(deleteupuser)
         console.log(deldata)
+        const deleteupuser = user.filter((_, ind) => ind !== inde)
+        setuser(deleteupuser)
     }
 
     //Edited section
@@ -55,7 +54,7 @@ const Allusers = () => {
     const handleClose = () => setShow(false);
 
     const handleSubmit = async (e) => {
-        e.preventDefault()                      
+        e.preventDefault()
         await axios.post(`${baseurl}/user/update`, editdata)
         const updatedData = user.map((user) =>
             user._id === editdata._id ? editdata : user

@@ -1,32 +1,37 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import { FaExclamation } from "react-icons/fa";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import Card from "react-bootstrap/Card";
 import "./Check.css";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import { loadStripe } from '@stripe/stripe-js';
 import { Button, FloatingLabel, Table } from "react-bootstrap";
 import { CartContext } from "../Context/CartContext";
 import axios from "axios";
 const Checkout = () => {
+  const location = useLocation()
+  const [coupon, setcoupon] = useState("")
   const { carti } = useContext(CartContext)
-
   //Total
   const [total, settotal] = useState(); //total
   useEffect(() => {
     settotal(
       carti.reduce((acc, crr) => {
-        return acc + Number(crr.price);
+        return acc + Number(crr.price * crr.quantity);
       }, 0)
     );
+    setcoupon(location.state)
   }, [carti]);
-  const HandleOrder = (num) => {
-    console.log(num);
-  }
+
+  useEffect(() => {
+    settotal((prev) => prev - coupon)
+    console.log(total);
+  }, [coupon])
+
+
+
   function CustomToggle({ children, eventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey);
     return (
@@ -59,55 +64,61 @@ const Checkout = () => {
 
 
   const [check, setcheck] = useState({
-    fname: "",
-    lname: "",
-    company: "",
-    country: "Choose...",
-    Address: "",
+    product: carti.map(obj => obj._id),
+    firstname: "",
+    lastname: "",
+    Companyname: "",
+    Streetaddress: "",
+    country: "",
     city: "",
-    district: "Choose...",
-    zip_code: "",
-    phone_no: "",
+    district: "",
+    postalcode: "",
+    phone: "",
     email: ""
   })
   const handlechange = (e) => {
     const { value, name } = e.target
     setcheck({ ...check, [name]: value })
   }
+
   const handlesubmit = (e) => {
     e.preventDefault()
-    console.log(check)
   }
 
   //MAkepayment
   const makepayment = async () => {
     const stripe = await loadStripe("pk_test_51OoTquSAtmHNt30iXuDuORAM20i3SVKdHGqc0ponW9d7g9weAvmAC4msaosXy3rCkWlwwVVJ6lmd6dov74NpvMiN00QRp94M72");
+    console.log(carti);
     const body = {
-        products: carti
+      products: carti,
+      coupon: coupon
     };
     try {
-        const response = await axios.post('http://localhost:8050/create-checkout-session', body, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+      const response = await axios.post('http://localhost:8050/create-checkout-session', body, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        const sessionId = response.data.id;
+      const sessionId = response.data.id;
+      console.log(sessionId)
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
 
-        const result = await stripe.redirectToCheckout({
-            sessionId: sessionId,
-        });
-
-        // Check for errors during redirection
-        if (result.error) {
-            console.error(result.error.message);
-        }
+      // Check for errors during redirection
+      if (result.error) {
+        console.error(result.error.message);
+      }
     } catch (error) {
-        console.error("Error creating Checkout session:", error);
+      console.error("Error creating Checkout session:", error);
     }
   }
 
-  
+    const handler = ()=>{
+      console.log(check)
+    }
+
   return (
     <>
       <div className="container-fluid wisht text-center p-5">
@@ -216,17 +227,17 @@ const Checkout = () => {
                 <div className="row">
                   <div className="col-lg-6 col-md-6 mt-3">
                     <Form.Label>First Name</Form.Label>
-                    <Form.Control type="text" placeholder="First name" value={check.fname} name="fname" onChange={handlechange} />
+                    <Form.Control type="text" placeholder="First name" value={check.firstname} name="firstname" onChange={handlechange} />
                   </div>
                   <div className="col-lg-6 col-md-6 mt-3">
                     <Form.Label>Last Name</Form.Label>
 
-                    <Form.Control type="text" placeholder="Last name" value={check.lname} name="lname" onChange={handlechange} />
+                    <Form.Control type="text" placeholder="Last name" value={check.lastname} name="lastname" onChange={handlechange} />
                   </div>
                 </div>
                 <Form.Group className="my-3" controlId="formGridAddress1">
                   <Form.Label>Company Name(Optional)</Form.Label>
-                  <Form.Control autoComplete="off" type="text" value={check.company} name="company" onChange={handlechange} />
+                  <Form.Control autoComplete="off" type="text" value={check.Companyname} name="Companyname" onChange={handlechange} />
                 </Form.Group>
 
                 <Form.Group controlId="formGridState">
@@ -245,7 +256,7 @@ const Checkout = () => {
                   <Form.Control
                     type="text"
                     placeholder="House Number and Street Name"
-                    value={check.Address}
+                    value={check.Streetaddress}
                     name="Address"
                     onChange={handlechange}
                   />
@@ -270,12 +281,12 @@ const Checkout = () => {
 
                 <Form.Group className="my-3" controlId="formGridAddress1">
                   <Form.Label>Postal Code/ Zip(Optional)</Form.Label>
-                  <Form.Control autoComplete="off" type="text" value={check.zip_code} name="zip_code" onChange={handlechange} />
+                  <Form.Control autoComplete="off" type="text" value={check.postalcode} name="postalcode" onChange={handlechange} />
                 </Form.Group>
 
                 <Form.Group className="my-3" controlId="formGridAddress1">
                   <Form.Label>Phone(Optional)</Form.Label>
-                  <Form.Control autoComplete="off" type="text" value={check.phone_no} name="phone_no" onChange={handlechange} />
+                  <Form.Control autoComplete="off" type="text" value={check.phone} name="phone" onChange={handlechange} />
                 </Form.Group>
 
                 <Form.Group className="my-3" controlId="formGridAddress1">
@@ -330,8 +341,8 @@ const Checkout = () => {
                           return (
                             <>
                               <tr>
-                                <td>{ele.slug}</td>
-                                <td>&#36;{ele.price}</td>
+                                <td>{ele.slug}*{ele.quantity}</td>
+                                <td>&#36;{ele.price * ele.quantity}</td>
                               </tr>
                             </>
                           )
@@ -466,8 +477,8 @@ const Checkout = () => {
 
                       <div className="logg col-12  mt-4">
                         <Button onClick={() => {
-                          // HandleOrder(check),
-                          makepayment()
+                          handler(check)
+                          // makepayment()
 
                         }}>PLACE ORDER</Button>
                       </div>

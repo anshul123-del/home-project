@@ -15,5 +15,6 @@ export const responsive = {
     mobile: {
         breakpoint: { max: 769, min: 0 },
         items: 1
+        
     }
 };

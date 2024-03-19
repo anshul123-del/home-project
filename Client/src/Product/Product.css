@@ -74,6 +74,7 @@
     border: 0;
     object-fit: cover;
     aspect-ratio: 3/2;
+    backface-visibility: hidden;
 
 }
 

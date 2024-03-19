@@ -8,6 +8,10 @@
 .car img {
     object-fit: cover;
 }
+.ghn{
+    width: 100%;
+    object-fit: cover;
+}
 
 #one {
     display: flex;
@@ -242,6 +246,18 @@
     #arro button {
         display: none;
     }
+    .future{
+        margin: 20px;
+    }
+}
+@media only screen and (max-width: 500px) {
+
+    #arro button {
+        display: none;
+    }
+    .future{
+        width: 10rem;
+    }
 }
 
 .pos{
@@ -265,4 +281,90 @@
 .pos:hover .shoes-img{
     transform: scale(1.1);
     transition: all 0.2s linear;
+}
+
+.codo{
+    line-height: 2.3rem;
+    font-style: italic;
+    font-family: sans-serif;
+}
+.cardh{
+    border-radius: 20px;
+    border: 2px solid #E4E4E4;
+   
+    aspect-ratio: 4/4;
+    object-fit: cover;
+    backface-visibility: hidden;
+}
+.img-wrap{
+    overflow: hidden;
+}
+.img-wrap1:hover{
+        transform: scale(1.1,1.1);
+        transition: 0.2s all linear;
+}
+.car0{
+    position: relative;
+}
+.car1{
+    position: absolute;
+    top: 20px;
+    right: 14px;
+    opacity: 0;
+    color: gray;
+    font-size: 20px;
+    transition: 1.2s;
+    font-size: 25px;
+}
+.car2{
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    opacity: 0;
+    color: gray;
+    font-size: 20px;
+    transition: 1.2s;
+    font-size: 25px;
+}
+.car3{
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    opacity: 0;
+    color: gray;
+    font-size: 20px;
+    transition: 1.2s;
+    font-size: 25px;
+}
+.car4{
+    position: absolute;
+    top: 140px;
+    right: 20px;
+    opacity: 0;
+    color: gray;
+    font-size: 20px;
+    transition: 1.2s;
+    font-size: 25px;
+}
+.car0:hover .car1{
+    opacity: 1;
+    right: 20px;
+}
+.car0:hover .car2{
+    opacity: 1;
+    right: 20px;
+}
+.car0:hover .car3{
+    opacity: 1;
+    right: 20px;
+}
+.car0:hover .car4{
+    opacity: 1;
+    right: 20px;
+}
+
+.shoet{
+    transform: scale(1.1);
+    transition: 0.3s all linear;
+    
 }

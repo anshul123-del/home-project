@@ -23,13 +23,12 @@ const Login = () => {
   const handlesubmit = async(e)=>{
     e.preventDefault()
    const res =  await axios.post(`http://localhost:8050/log`,data)
-    console.log(res)
     setauth({
       ...auth,
       user: res.data.user,
     });
+    console.log(auth)
     localStorage.setItem("auth", JSON.stringify(res.data));
-
     navigate("/")
     console.log(data)
     

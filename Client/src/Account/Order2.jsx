@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
+import { Authcontext } from '../Context/AuthContext'
+import axios from 'axios'
 
 const Order2 = () => {
+  const { auth, baseurl } = useContext(Authcontext)
+  const email = auth?.user?.email
+  const [order, setorder] = useState([])
+  const [orderitem, setorderitem] = useState([])
+  const handlesingleorder = async () => {
+    const data = await axios.get(`${baseurl}/get/singleuser/${email}`)
+    setorder(data.data.data)
+    setorderitem(data.data.data.product)
+  }
+  useEffect(() => {
+    handlesingleorder()
+  }, [])
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
           <div className='dashboard'>
             <h4 className="order-add">Orders</h4>
-            <hr/>
+            <hr />
             <Table responsive bordered>
               <thead>
                 <tr className='das-font-2'>
@@ -20,27 +34,21 @@ const Order2 = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className='das-font-3'>
-                  <td>1</td>
-                  <td>Aug 22, 2022</td>
-                  <td>Pending</td>
-                  <td>$3000</td>
-                  <td>View</td>
-                </tr>
-                <tr className='das-font-3'>
-                  <td>2</td>
-                  <td>Aug 23, 2023</td>
-                  <td>Pending</td>
-                  <td>$3000</td>
-                  <td>View</td>
-                </tr>
-                <tr className='das-font-3'>
-                  <td>3</td>
-                  <td>Aug 24, 2024</td>
-                  <td>Pending</td>
-                  <td>$3000</td>
-                  <td>View</td>
-                </tr>
+                {
+                  order.map((data,ind) => {
+                    return (
+                      <tr className='das-font-3'>                        
+                      <td>{ind+1}</td>
+                      <td>{data.Date}</td>
+                      <td>{data.Date === data.Status?" Deliverd ✔️":`order will be deliverd on ${data.Status}`}</td>
+                        <td>{data.city}</td>
+                        <td>{data.Companyname}</td>
+                        <td>View</td>
+                      </tr>
+                    )
+                  })
+                }
+
               </tbody>
 
             </Table>

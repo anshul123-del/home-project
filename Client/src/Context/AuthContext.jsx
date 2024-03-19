@@ -5,7 +5,7 @@ const Authprovider = ({ children }) => {
   const baseurl = "http://localhost:8050";
   const [auth, setauth] = useState({
     user: null,
-    
+
   });
   useEffect(() => {
     const data = localStorage.getItem("auth");
@@ -15,11 +15,12 @@ const Authprovider = ({ children }) => {
         ...auth,
         user: parsedata.user,
       });
+      console.log(auth)
     }
     //eslint-disable-next-line
   }, []);
   return (
-    <Authcontext.Provider value={{ auth, setauth,baseurl }}>
+    <Authcontext.Provider value={{ auth, setauth, baseurl }}>
       {children}
     </Authcontext.Provider>
   );

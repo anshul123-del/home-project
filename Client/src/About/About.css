@@ -76,6 +76,7 @@
 }
 .pos{
     position: relative;
+    overflow: hidden;
 }
 
 .bor-main{

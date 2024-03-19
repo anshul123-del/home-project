@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { CartContext } from "../Context/CartContext";
 import "./Cart.css";
 import { Table } from "react-bootstrap";
+import axios from "axios"
 const Cart = () => {
   const navigate = useNavigate();
   const navigate1 = useNavigate();
+  const [coupon, setCoupon] = useState("")
+  const [discountVal, setDiscountval] = useState(0)
   const { carti, setcarti } = useContext(CartContext);
   console.log(carti)
   const del = (pid) => {
+
     const deleteddata = carti.filter((ele, ind) => ind !== pid);
     setcarti(deleteddata);
     localStorage.setItem("cart", JSON.stringify(deleteddata));
@@ -24,15 +28,57 @@ const Cart = () => {
   useEffect(() => {
     settotal(
       carti.reduce((acc, crr) => {
-        return acc + Number(crr.price);
+        return acc + Number(crr.price * crr.quantity);
       }, 0)
     );
   }, [carti]);
-  
-  //Quantity
-  const[count,setcount] = useState(1)
-  const add = (id)=> {setcount(count+1)}
-  const sub = ()=>{setcount(count-1)}
+
+  //Increment Section In Quantity
+  const IncrementQuantity = (i) => {
+    console.log(i);
+    const ExistingItem = carti.find((elem) => {
+      return elem._id === i
+    })
+
+    if (ExistingItem) {
+      const ParsedArr = JSON.parse(localStorage.getItem("cart"))
+      ParsedArr.map((elem) => {
+        if (elem._id === i) {
+          elem.quantity++
+        }
+      })
+      localStorage.setItem("cart", JSON.stringify(ParsedArr))
+      setcarti(ParsedArr)
+    }
+  }
+  //Decrement Section In Quantity
+  const DecrementQuantity = (i) => {
+    console.log(i);
+    const ExistingItem = carti.find((elem) => {
+      return elem._id === i
+    })
+
+    if (ExistingItem) {
+      const ParsedArr = JSON.parse(localStorage.getItem("cart"))
+      ParsedArr.map((elem) => {
+        if (elem._id === i) {
+          elem.quantity--
+        }
+      })
+      localStorage.setItem("cart", JSON.stringify(ParsedArr))
+      setcarti(ParsedArr)
+    }
+  }
+
+  const ApplyCoupon = async () => {
+    const data = await axios.post("http://localhost:8050/coupon/getcoupon", {CouponCode: coupon })
+    setDiscountval(data.data[0].discountvalue)
+  }
+  useEffect(() => {
+    console.log(discountVal);
+    settotal((prev) => prev - discountVal)
+  }, [discountVal])
+
   return (
     <>
       <div className="container-fluid carti text-center p-5">
@@ -58,7 +104,7 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody className="table-group-divider">
-                {carti.map((ele, ind) => {
+                {carti.length !== 0 && carti?.map((ele, ind) => {
                   return (
                     <tr>
                       <th scope="row" className="align-middle">
@@ -88,14 +134,16 @@ const Cart = () => {
                             role="group"
                             aria-label="Basic example"
                           >
-                           <button onClick={add}>+</button>
-                            <span>{count}</span>
-                          <button onClick={sub}>-</button>
+                            <button onClick={() => {
+                              IncrementQuantity(ele._id)
+                            }}>+</button>
+                            <span>{ele.quantity}</span>
+                            <button onClick={() => { DecrementQuantity(ele._id) }}>-</button>
 
                           </div>
                         </span>
                       </td >
-                      <td className="align-middle">$ {ele.price}</td>
+                      <td className="align-middle">$ {ele.price * ele.quantity}</td>
                     </tr>
                   );
                 })}
@@ -181,11 +229,15 @@ const Cart = () => {
             <p className="my-3">Enter your coupon code if you have one.</p>
             <div className="text-center ">
               <form>
-                <input type="text" placeholder="Enter your Coupon Code"></input>
+                <input type="text" placeholder="Enter your Coupon Code" onChange={(e) => {
+                  setCoupon(e.target.value)
+                }}></input>
               </form>
             </div>
             <h6 className="text-end pt-4">
-              <Link>APPLY COUPON</Link>
+              <button onClick={() => {
+                ApplyCoupon()
+              }}>APPLY COUPON</button>
             </h6>
           </div>
 
@@ -245,8 +297,10 @@ const Cart = () => {
             </div>
 
             <div className="checkout mt-3">
-              <button onClick={()=>{
-                  navigate1("/checkout")
+              <button onClick={() => {
+                navigate1("/checkout", {
+                  state: discountVal
+                })
               }}>PROCEED TO CHECKOUT</button>
             </div>
           </div>

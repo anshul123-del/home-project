@@ -3,20 +3,23 @@ export const CartContext = createContext();
 
 const Cartpro = ({ children }) => {
   const [carti, setcarti] = useState([]);
-  const[wishlist,setwishlist] = useState([]);
+  const [wishlist, setwishlist] = useState([]);
 
 
   useEffect(() => {
-    const existingcart = localStorage.getItem("cart");
-    if (existingcart) 
-    setcarti(JSON.parse(existingcart));
+    if (localStorage.getItem("cart") !== null) {
+      const existingcart = localStorage.getItem("cart");
+      if (existingcart)
+        setcarti(JSON.parse(existingcart));
+    }
   }, []);
+  
   useEffect(() => {
     const existingwishlist = localStorage.getItem("wishlist");
     if (existingwishlist) setwishlist(JSON.parse(existingwishlist));
   }, []);
   return (
-    <CartContext.Provider value={{ carti, setcarti,wishlist,setwishlist }}>
+    <CartContext.Provider value={{ carti, setcarti, wishlist, setwishlist }}>
       {children}
     </CartContext.Provider>
   );

@@ -15,7 +15,6 @@ const useFooterWindow = () => {
             window.addEventListener("resize",handleresize)
             handleresize()
             return ()=> window.removeEventListener("resize", handleresize   )
-
       },[])
       return windowsize;
   

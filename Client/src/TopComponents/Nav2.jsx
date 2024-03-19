@@ -115,7 +115,7 @@ const Nav2 = () => {
           <div className="container cart">
             {carti.map((ele, ind) => {
               return (
-                <div className="row my-4">
+                <div className="row my-4" key={ele._id}>
                   <div className="col-4">
                     <img src={ele.image} alt="..." className="img-fluid"></img>
                   </div>

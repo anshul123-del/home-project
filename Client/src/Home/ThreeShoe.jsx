@@ -1,7 +1,7 @@
 import React from 'react'
 import Img1 from '../images/domino-164_6wVEHfI-unsplash.jpg'
-import Img2 from '../images/domino-164_6wVEHfI-unsplash.jpg'
-import Img3 from '../images/domino-164_6wVEHfI-unsplash.jpg'
+import Img2 from '../images/img2.jpg'
+import Img3 from '../images/wishlist.jpg'
 import './Home.css'
 
 const Imagesec = () => {

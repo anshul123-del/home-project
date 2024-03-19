@@ -40,6 +40,7 @@ import Allusers from "./Dashboard/Allusers";
 import CreateProduct from "./Dashboard/CreateProduct";
 import Success from "./Checkout/Success";
 import Cancel from "./Checkout/Cancel";
+import CreateCoupon from "./Coupon/CreateCoupon";
 // import Addtocart from "./Cart/Addtocart";
 // import Productlisting from "./Product/Productlisting";
 function App() {
@@ -71,11 +72,11 @@ function App() {
           <Route path="/account" element={<Account />}>
             <Route path="dashboard" element={<Dashboard />}></Route>
             <Route path="accountdetails" element={<Accountdetails />} />
-            <Route path="successfull" element={<Order2 />} />
+            <Route path="order" element={<Order2 />} />
             <Route path="downloads" element={<Download />} />
             <Route path="payment" element={<Payment />} />
-            {/* <Route path="logout" element={<Login />} /> */}
-            <Route path="addresspayment" element={<Address />} />
+            <Route path="logout" element={<Login />} />
+            <Route path="address" element={<Address />} />
             <Route path="" element={<Dashboard />} />
           </Route>
 
@@ -109,8 +110,9 @@ function App() {
             <Route path="accountdetails" element={<Allusers />}></Route>
             <Route path="addproduct" element={<CreateProduct />}></Route>
           </Route>
+          {/* Creating-Coupon */}
+          <Route path="/Coupon" element={<CreateCoupon />}></Route>
         </Routes>
-
 
         <Footerr />
       </Router>

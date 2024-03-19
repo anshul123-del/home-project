@@ -20,8 +20,8 @@ const Dashboard = () => {
             <h4>Dashboard</h4>
             <p></p>
             <p className="das-font">
-              Hello,<span className="text-danger">{auth?.user?.name || "tuntuni"}</span>( If not{" "}
-              <span className="text-danger">{auth?.user?.name || "tuntuni"} <Link to="/login"onClick={handleclick}>!logout</Link>)</span>
+              Hello,<span className="text-danger"><b>{auth?.user?.name || "tuntuni"}</b></span>( If not{" "}
+              <span className="text-danger"><b>{auth?.user?.name || "tuntuni"} <Link to="/login"onClick={handleclick}>!logout</Link>)</b></span>
             </p>
             <p className="das-font">
               From your account dashboard. you can easily check & view your
