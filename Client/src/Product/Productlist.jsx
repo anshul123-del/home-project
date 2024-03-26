@@ -36,13 +36,13 @@ const Productlist = () => {
     .map((item, ind) => {
       const { _id } = item
       return (
-        <>
-          <div className="col-12 shadow mb-3 colt ">
+     
+          <div className="col-12 shadow mb-3 colt " key={item._id}>
             <div className="row">
               <div key={ind} className="cdi card-1 col-lg-4 col-md-6 my-4">
                 <Link to={`/singlepro/${_id}`}>  <img
                   src={item.image}
-                  class="card-img-top img-fluid img-bor"
+                  className="card-img-top img-fluid img-bor"
                   style={{ height: "200px", width: "100%" }}
                 />
                 </Link>
@@ -105,7 +105,6 @@ const Productlist = () => {
               </div>
             </div>
           </div>
-        </>
       );
     });
 

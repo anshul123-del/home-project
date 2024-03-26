@@ -46,7 +46,7 @@ const Wishlist = () => {
                 {
                   wishlist.map((item,ind)=>{
                     return(
-                      <tr>
+                      <tr key={item._id}>
                   <th scope="row" className="align-middle">
                    <button className="del" onClick={()=>{
                     handledelete(ind)

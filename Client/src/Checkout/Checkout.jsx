@@ -27,7 +27,6 @@ const Checkout = () => {
 
   useEffect(() => {
     settotal((prev) => prev - coupon)
-    console.log(total);
   }, [coupon])
 
 
@@ -115,7 +114,8 @@ const Checkout = () => {
     }
   }
 
-    const handler = ()=>{
+    const handler = async(check)=>{
+        // await axios.post(`http://localhost:8050/order`,check)
       console.log(check)
     }
 
@@ -339,12 +339,12 @@ const Checkout = () => {
                       {
                         carti.map((ele) => {
                           return (
-                            <>
-                              <tr>
+                
+                              <tr key={ele._id}>
                                 <td>{ele.slug}*{ele.quantity}</td>
                                 <td>&#36;{ele.price * ele.quantity}</td>
                               </tr>
-                            </>
+                            
                           )
                         })
                       }
@@ -478,7 +478,7 @@ const Checkout = () => {
                       <div className="logg col-12  mt-4">
                         <Button onClick={() => {
                           handler(check)
-                          // makepayment()
+                          makepayment()
 
                         }}>PLACE ORDER</Button>
                       </div>

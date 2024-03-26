@@ -36,7 +36,7 @@ const Related = () => {
     return(
         <div  key={item._id} className='card-1 m-3'>
           <div className='img-wrapper-2'>
-        <img src={item.image} class="img-fluid inner-img-2 img-img"/>
+        <img src={item.image} className="img-fluid inner-img-2 img-img"/>
         </div>
         <div className="card-body mar-2">
           <h5 className="card-title">category:{item.category}</h5>

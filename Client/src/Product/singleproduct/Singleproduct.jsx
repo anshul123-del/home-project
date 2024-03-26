@@ -27,6 +27,7 @@ const Singleproduct = () => {
   const { feat } = Shoecont();
   const { _id } = useParams();
   const { wishlist, setwishlist } = useContext(CartContext);
+  const{carti,setcarti} = useContext(CartContext)
   // console.log(wishlist);
   const getdata = () => {
     // console.log(feat);
@@ -60,145 +61,72 @@ const Singleproduct = () => {
   const { auth, } = useContext(Authcontext);
 
   const [addcart, setaddcart] = useState({
-    "userid":"",
-    "product":[
+    "userid": "",
+    "product": [
       {
-      "productid":""
+        "productid": ""
       },
     ]
   })
   const addcartt = async (pid) => {
-    setaddcart({userid:auth?.user?.id,product:[{productid:pid}]})
+    setaddcart({ userid: auth?.user?.id, product: [{ productid: pid }] })
 
     const data = await axios.post(`http://localhost:8050/addcart`, addcart)
-      console.log(data)
-     
+    console.log(data)
+
   }
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row padd-5">
-          <div className="col-lg-6 col-md-12 col-sm-12">
-            <div className="pro-img padd-6">
-              <div className="row">
-                <div className="col-12">
-                  <div>
-                    <img src={product.image} alt="" className="img-fluid" />
-                  </div>
-                </div>
-              </div>
-              <div className="row py-3">
-                <div className="col-3">
-                  <img src={product.image} alt="" className="img-fluid" />
-                </div>
-                <div className="col-3">
-                  <img src={product.image} alt="" className="img-fluid" />
-                </div>
-                <div className="col-3">
-                  <img src={product.image} alt="" className="img-fluid" />
-                </div>
-                <div className="col-3">
-                  <img src={product.image} alt="" className="img-fluid" />
-                </div>
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="p-2 mt-4">
+                <img src={product.image} className="img-fluid pvr"></img>
               </div>
             </div>
-          </div>
-          <div className="col-lg-6 col-md-12 col-sm-12">
-            <div className="pro-img-2 padd-6">
+            <div className="col-lg-6 p-2 mt-4 ">
               <h3>{product.category}</h3>
-              <h5>${product.price}</h5>
+              <h2>${product.price}</h2>
               <h5>{product.slug}</h5>
               <h5>{product.brand}</h5>
-              <p className="d-flex flex-wrap gap-3">
-                <span>
-                  <Rating
-                    name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
-                  />
-                </span>{" "}
-                <span>(5 customer reviews)</span>
+              <p><Rating /></p>
+              <hr></hr>
+
+              <p className="fs-5">
+                Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis n
+                ostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat.
+                Duis aute irure dolor
               </p>
-              <hr />
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Assumenda vitae sit tenetur iure velit reiciendis voluptatem
-                sequi rem incidunt odit sapiente pariatur corrupti aperiam
-                quidem repellat asperiores, veniam omnis beatae!
-              </p>
-              <div className="d-flex">
-                <h3>Color : </h3>
-                <ul className="ul-review">
-                  <li className="li-review active"></li>
-                  <li className="li-review-2"></li>
-                  <li className="li-review-3"></li>
-                  <li className="li-review-4"></li>
-                </ul>
-              </div>
-              <div className="d-flex">
-                <h3>Size : </h3>
-                <ul className="ul-review">
-                  <li className="li-reviews active">S</li>
-                  <li className="li-reviews-2">M</li>
-                  <li className="li-reviews-3">XL</li>
-                  <li className="li-reviews-4">XXL</li>
-                </ul>
-              </div>
               <div className="main-side">
                 <div className="quantity">
                   <p className="inp-inp">1</p>
                   <div className="sub">-</div>
                   <div className="plus">+</div>
-                </div>
 
-                <Link onClick={() => {
-                  console.log(addcart)
-                  addcartt(product._id)
-                  
-                  console.log("add to cart")
-                }}className="btn-theme">Add to cart</Link>
+                </div>
+                <div><button className="cactus" onClick={()=>{setcarti([...carti,product]),localStorage.setItem('cart',JSON.stringify([...carti,product]))}}>Add toCart</button></div>
               </div>
-              <div>
-                <div className="d-flex gap-4 flex-wrap mt-3">
-                  <div className="d-flex gap-2 fs-4">
-                    <p>
-                      <FaRegHeart className="text-danger" />
-                    </p>
-                    <button
-                      onClick={() => {
-                        setwishlist([...wishlist, product]);
-                        localStorage.setItem(
-                          "wishlist",
-                          JSON.stringify([...wishlist, product])
-                        );
-                      }}
-                    >
-                      Add To List
-                    </button>
-                  </div>
-                  <div className="d-flex gap-2 fs-4">
-                    <p>
-                      <FaCodeCompare className="text-danger" />
-                    </p>
-                    <p>Add To Compare</p>
-                  </div>
+
+              <div className=" wiscart">
+                <div className="mt-4" style={{ cursor: "pointer" }} onClick={() => { setwishlist([...wishlist, product]), localStorage.setItem('wish', JSON.stringify([...wishlist, product])) }}><h5><FaRegHeart className="text-danger mx-2" />
+                  Add to Wishlist</h5></div>
+                <div className="compte" style={{ cursor: "pointer" }}><h5><FaCodeCompare className="text-danger mx-2" />
+                  Add to Compare</h5></div>
+              </div>
+              <hr></hr>
+              <div className="d-flex justify-content-between">
+                <div >
+                  <p><span className="text-danger fs-5">Code:</span><span className="mx-1 fs-5">ch-256xl</span></p>
                 </div>
-                <hr />
-                <div className="d-flex justify-content-between align-items-center flex-wrap">
-                  <p>
-                    <span className="text-danger fs-4">code</span> : Ch-3xml
-                  </p>
-                  <p className="text-end fs-4">
-                    <span className="text-danger">share</span> <FaFacebook />{" "}
-                    <FaInstagram /> <FaWhatsapp /> <FaTwitter />
-                  </p>
-                </div>
+                <div ><p className="text-danger fs-5">Share<span className="mx-2"><FaFacebook />{" "}
+                  <FaInstagram /> <FaWhatsapp /> <FaTwitter /></span></p></div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="container">
           <div className="row">
             <Tabs
@@ -210,7 +138,7 @@ const Singleproduct = () => {
             >
               <Tab eventKey="Information" title="Information">
                 <div className="bor-review">
-                  <p className="font-review">
+                  <p className="font-review fs-5">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim adlo minim veniam, quis nostrud exercitation
@@ -230,7 +158,7 @@ const Singleproduct = () => {
               </Tab>
               <Tab eventKey="description" title="Description">
                 <div className="bor-review">
-                  <p className="font-review">
+                  <p className="font-review fs-5">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim adlo minim veniam, quis nostrud exercitation

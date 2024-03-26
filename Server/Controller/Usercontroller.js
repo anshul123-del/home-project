@@ -64,11 +64,17 @@ const Usercontroller = {
   },
 
   deletee: async (req, res) => {
-    const { _id } = req.body;
+    try {
+      const {_id} = req.body;
     const deleted = await User.deleteOne({ id: _id });
     res.json({
       message: deleted,
     });
+    } catch (error) {
+      res.status(500).json({
+        message:error
+      })
+    }
   },
 
   update: async (req, res) => {

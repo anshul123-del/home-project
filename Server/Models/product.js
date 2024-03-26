@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Productschema = mongoose.Schema({
-  name:String,
+  name: String,
   price: Number,
   image: {
     type: String,
@@ -13,9 +13,13 @@ const Productschema = mongoose.Schema({
   },
   category: String,
   slug: String,
-  items_left: Number, 
+  items_left: Number,
   brand: String,
+  quantity: {
+    type: Number,
+    default: 1
+  }
 });
 
 const shoedata = mongoose.model("Shoees", Productschema);
-module.exports = shoedata;
+module.exports = shoedata;  

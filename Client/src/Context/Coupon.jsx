@@ -13,12 +13,10 @@ const CouponProvider = ({ children }) => {
             setcoupon({ ...coupon, coupons: cpdata })
             localStorage.setItem("coupon", JSON.stringify(cpdata))
             const ldata = localStorage.getItem("coupon")
-            console.log(ldata)
         }
         getcoupon()
     }, [])
 
-    console.log(coupon)
 
 
     return <CouponContext.Provider value={{ baseurl }}>

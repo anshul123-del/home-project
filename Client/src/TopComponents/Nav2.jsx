@@ -5,7 +5,7 @@ import { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Badge from "react-bootstrap/Badge";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { MdArrowForwardIos } from "react-icons/md";
 import { CartContext } from "../Context/CartContext";
@@ -15,8 +15,12 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaDeleteLeft } from "react-icons/fa6";
+import { useSearch } from "../Context/Search";
+import axios from "axios";
 
 const Nav2 = () => {
+  const { searchi, setsearchi, baseurl } = useSearch()
+
   const [show, setShow] = useState(false);
   const [showham, setShowham] = useState(false);
   const [showsearch, setShowsearch] = useState(false);
@@ -44,6 +48,18 @@ const Nav2 = () => {
     setcarti(deleted);
     localStorage.setItem("cart", JSON.stringify(deleted));
   };
+
+  const navigate = useNavigate()
+  const handlesubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const { data } = await axios.get(`${baseurl}/search/${searchi.keyword}`)
+      setsearchi({ ...searchi, results: data })
+        navigate("/search")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <>
       <div className="container-fluid">
@@ -196,7 +212,7 @@ const Nav2 = () => {
               </li>
 
               <li>
-                <Link>
+                <Link to="/account">
                   <IoPersonSharp className="offi" />
                   Account
                 </Link>
@@ -296,11 +312,11 @@ const Nav2 = () => {
                   data-bs-parent="#accordionFlushExample"
                 >
                   <div className="accordion-body">
-                    <div class="accordion" id="accordionPanelsStayOpenExample">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
+                    <div className="accordion" id="accordionPanelsStayOpenExample">
+                      <div className="accordion-item">
+                        <h2 className="accordion-header">
                           <button
-                            class="accordion-button"
+                            className="accordion-button"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseOne"
@@ -312,9 +328,9 @@ const Nav2 = () => {
                         </h2>
                         <div
                           id="panelsStayOpen-collapseOne"
-                          class="accordion-collapse collapse show"
+                          className="accordion-collapse collapse show"
                         >
-                          <div class="accordion-body">
+                          <div className="accordion-body">
                             <ul className="moni">
                               <li>
                                 <Link to="/product" className="filter">
@@ -340,10 +356,10 @@ const Nav2 = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
+                      <div className="accordion-item">
+                        <h2 className="accordion-header">
                           <button
-                            class="accordion-button collapsed"
+                            className="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapsemetoo"
@@ -355,9 +371,9 @@ const Nav2 = () => {
                         </h2>
                         <div
                           id="panelsStayOpen-collapsemetoo"
-                          class="accordion-collapse collapse"
+                          className="accordion-collapse collapse"
                         >
-                          <div class="accordion-body">
+                          <div className="accordion-body">
                             <ul className="moni">
                               <li>
                                 <Link to="/account" className="filter">
@@ -383,10 +399,10 @@ const Nav2 = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
+                      <div className="accordion-item">
+                        <h2 className="accordion-header">
                           <button
-                            class="accordion-button collapsed"
+                            className="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapsepage"
@@ -398,9 +414,9 @@ const Nav2 = () => {
                         </h2>
                         <div
                           id="panelsStayOpen-collapsepage"
-                          class="accordion-collapse collapse"
+                          className="accordion-collapse collapse"
                         >
-                          <div class="accordion-body">
+                          <div className="accordion-body">
                             <ul className="moni">
                               <li>
                                 <Link to="/cart" className="filter">
@@ -494,13 +510,14 @@ const Nav2 = () => {
                 Start Typing And Press Enter To Search Search
               </div>
               <div className="col-12 mt-4">
-                <form className="d-flex " role="search">
+                <form className="d-flex " role="search" onSubmit={handlesubmit}>
                   <input
                     className="form-control me-2 "
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
                     id="searchbar"
+                    onChange={(e) => setsearchi({ ...searchi, keyword: e.target.value })}
                   />
                   <button
                     className="btn btn-success"

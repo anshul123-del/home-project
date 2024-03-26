@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault()
    const res =  await axios.post(`http://localhost:8050/log`,data)
     setauth({
-      ...auth,
+      ...auth,  
       user: res.data.user,
     });
     console.log(auth)

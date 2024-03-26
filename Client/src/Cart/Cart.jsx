@@ -13,7 +13,6 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("")
   const [discountVal, setDiscountval] = useState(0)
   const { carti, setcarti } = useContext(CartContext);
-  console.log(carti)
   const del = (pid) => {
 
     const deleteddata = carti.filter((ele, ind) => ind !== pid);
@@ -75,7 +74,6 @@ const Cart = () => {
     setDiscountval(data.data[0].discountvalue)
   }
   useEffect(() => {
-    console.log(discountVal);
     settotal((prev) => prev - discountVal)
   }, [discountVal])
 
@@ -106,7 +104,7 @@ const Cart = () => {
               <tbody className="table-group-divider">
                 {carti.length !== 0 && carti?.map((ele, ind) => {
                   return (
-                    <tr>
+                    <tr key={ele._id}>
                       <th scope="row" className="align-middle">
                         <button
                           className="del"
@@ -130,7 +128,7 @@ const Cart = () => {
                       <td className="align-middle">
                         <span className="qty">
                           <div
-                            class="btn-group"
+                            className="btn-group"
                             role="group"
                             aria-label="Basic example"
                           >

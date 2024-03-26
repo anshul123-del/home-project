@@ -1,8 +1,8 @@
-.padd-5{
+.paddd-5{
     padding: 30px 240px;
 }
 
-.padd-6{
+.paddd-6{
     padding: 0px 20px;
 }
 
@@ -280,7 +280,56 @@
 
         padding: 10px 30px 10px;
     }
+    
+}
+.wiscart{
+    display: flex;
+}
+.compte{
+    margin: 20px;
+}
 
+@media only screen and (max-width: 450px) {
+        .wiscart{
+            display: block;
+           
+        }
+        .compte{
+            margin: 0;
+        }
+}
+    
 
+.cactus{
+    padding-left: 62px;
+    padding-bottom: 21px;
+    padding-top: 21px;
+    padding-right: 63px;
+    margin-left: 20px;
+    border: 0;
+    background: #EB3E32;
+    color: white;
+    font-weight: bold;
+}
+@media only screen and (max-width: 330px) {
+    .cactus{
+        padding-left: 35px;
+        padding-bottom: 16px;
+        padding-top: 16px;
+        padding-right: 41px;
+        margin-left: 20px;
+        border: 0;
+    }
+}
 
+.cactus:hover{
+    border: 2px solid #EB3E32;
+    background: white;
+    color: #c51f1f;
+    transition: 0.3s all;
+}
+.pvr{
+    border: 2px solid #E1E1E1;
+    border-radius: 20px;
+    width: 80%;
 }

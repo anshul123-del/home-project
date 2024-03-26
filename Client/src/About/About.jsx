@@ -18,12 +18,12 @@ const Aboutus = () => {
           </div>
         </div>
       </div>
-      <Topabout/>
-                <Saving/>
-                <Ourteam/>
-                <Blog/>
+      <Topabout />
+      <Saving />
+      <Ourteam />
+      <Blog />
 
-     
+
     </>
   );
 };
