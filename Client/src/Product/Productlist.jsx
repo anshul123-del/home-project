@@ -13,7 +13,6 @@ import { Shoecont } from "../Context/Context";
 import { Authcontext } from "../Context/AuthContext";
 const Productlist = () => {
   const { auth } = useContext(Authcontext)
-  const [data, setdata] = useState([]);
   const [viewdata, setviewdata] = useState(null);
   const navigate = useNavigate();
 
@@ -40,7 +39,7 @@ const Productlist = () => {
           <div className="col-12 shadow mb-3 colt " key={item._id}>
             <div className="row">
               <div key={ind} className="cdi card-1 col-lg-4 col-md-6 my-4">
-                <Link to={`/singlepro/${_id}`}>  <img
+                <Link to={`/singlepro/${_id}`}><img
                   src={item.image}
                   className="card-img-top img-fluid img-bor"
                   style={{ height: "200px", width: "100%" }}

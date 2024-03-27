@@ -15,7 +15,7 @@ const Cartpro = ({ children }) => {
   }, []);
   
   useEffect(() => {
-    const existingwishlist = localStorage.getItem("wishlist");
+    const existingwishlist = localStorage.getItem("wish");
     if (existingwishlist) setwishlist(JSON.parse(existingwishlist));
   }, []);
   return (

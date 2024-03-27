@@ -467,10 +467,10 @@ const Nav2 = () => {
                   <div className="accordion-body">
                     <ul className="moni">
                       <li>
-                        <Link className="filter">Single Blog</Link>
+                        <Link to="/Blogsection" className="filter">Single Blog</Link>
                       </li>
                       <li>
-                        <Link className="filter">Grid Blog</Link>
+                        <Link to="/Blogdetails"  className="filter">Grid Blog</Link>
                       </li>
                     </ul>
                   </div>

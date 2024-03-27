@@ -27,7 +27,10 @@ const FeaturedItems = () => {
         <div className="col-lg-3 col-md-4 col-sm-6 p-2 car0" key={ele._id}>
           <Link to={`/singlepro/${_id}`}>
             <div className="img-wrap">
-              <div className="img-wrap1"><img src={ele.image} className="img-fluid cardh"></img></div>
+              
+              <div className="img-wrap1 position-relative"><img src={ele.image} className="img-fluid cardh"></img>
+              <div className="badge text-bg-danger position-absolute p-2" style={{left: "24px" ,top: "20px"}}>20% OFF</div>
+              </div>
             </div>
 
           </Link>

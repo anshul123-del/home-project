@@ -15,8 +15,8 @@ const Account = () => {
         </div>
       </div>
    <div className="container-fluid ">
-    <div className="row justify-content-center">
-        <div className="col-lg-2 col-md-2 col-sm-6">
+    <div className="row justify-content-center p-4">
+        <div className="col-lg-3 col-md-6 col-sm-6">
             <div>
                 <Sideaccount/>
             </div>

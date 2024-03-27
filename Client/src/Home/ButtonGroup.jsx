@@ -21,7 +21,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
       {/* <button onClick={() => next()} /> */} 
       <button 
         onClick={() => goToSlide(currentSlide + 1)}
-        style={{ position: "absolute", bottom: "220px", right: "-15px"}}
+        style={{ position: "absolute", bottom: "220px", right: "-47px"}}
       >
         {" "}
        <span className="seller"> <FaArrowRight /></span>

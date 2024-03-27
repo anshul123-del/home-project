@@ -202,7 +202,7 @@
     background-repeat: no-repeat;
     background-size: 400px;
     object-fit: cover;
-    height: 100%;
+    aspect-ratio: 3/2;
     display: block;
 }
 
@@ -212,7 +212,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-image: url(../images//puma.png);
+    background-image: url(../images/domino-164_6wVEHfI-unsplash.jpg);
     background-repeat: no-repeat;
     background-size: 400px;
     object-fit: cover;
@@ -226,7 +226,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-image: url(../images//puma.png);
+    background-image: url(../images/img2.jpg);
     background-repeat: no-repeat;
     background-size: 400px;
     object-fit: cover;
@@ -257,6 +257,12 @@
     }
     .future{
         width: 10rem;
+    }
+}
+@media only screen and (max-width: 300px) {
+
+    .deli{
+            display: none;
     }
 }
 
