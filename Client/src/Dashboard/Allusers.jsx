@@ -11,10 +11,8 @@ const Allusers = () => {
     const { auth } = useContext(Authcontext)
     const { baseurl } = useContext(Authcontext)
     const [user, setuser] = useState([])
-    console.log(auth)
     const jwtToken = auth?.user?.jwtToken
-
-
+    
     const getdata = async () => {
         try {
             const response = await axios.get(`http://localhost:8050/get`, {
@@ -23,7 +21,8 @@ const Allusers = () => {
                     'Authorization': `Bearer ${jwtToken}`
                 }
             });
-            setuser(response.data.data);
+            setuser(response.data.data)
+            console.log(response.data)
         } catch (error) {
             console.error('API Request Error:', error);
         }
@@ -32,6 +31,7 @@ const Allusers = () => {
 
     useEffect(() => {
         getdata();
+        console.log(user)
     }, []);
 
     const deleted = async (_id, inde) => {
@@ -40,9 +40,7 @@ const Allusers = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${jwtToken}`
             }
-
         })
-        console.log(deldata)
         const deleteupuser = user.filter((_, ind) => ind !== inde)
         setuser(deleteupuser)
     }
@@ -68,36 +66,17 @@ const Allusers = () => {
     }
     const f1 = <>
         <Form onClick={handleSubmit}>
-            <Typography>Register Form</Typography>
+            <Typography>Edit category</Typography>
             <TextField
                 label="Name"
                 name="Name"
-                value={editdata.Name}
+                value={editdata.categoryname}
                 onChange={handleChange}
                 margin="normal"
                 fullWidth
                 required
             />
-            <TextField
-                label="Email"
-                type="email"
-                name="email"
-                value={editdata.email}
-                onChange={handleChange}
-                margin="normal"
-                fullWidth
-                required
-            />
-            <TextField
-                label="Password"
-                type="text"
-                name="password"
-                value={editdata.password}
-                onChange={handleChange}
-                margin="normal"
-                fullWidth
-                required
-            />
+            
             <Button
                 onClick={handleClose}
                 type="submit"
@@ -114,6 +93,7 @@ const Allusers = () => {
 
         <div>
             <Table responsive bordered>
+                <thead/>
                 <tr>
                     <th>Name</th>
                     <th>email</th>
@@ -125,7 +105,7 @@ const Allusers = () => {
                     {
                         user.map((ele, inde) => {
                             return (
-                                <tr key={ele._id}>
+                                <tr key={ele._id} >
                                     <td>{ele.Name}</td>
                                     <td>{ele.email}</td>
                                     <td>{ele.password}</td>

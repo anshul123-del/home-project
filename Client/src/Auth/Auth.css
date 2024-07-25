@@ -3,16 +3,32 @@
     background-repeat: no-repeat;
     background-attachment:scroll;
     background-size: 100%;
-    height: auto;
+    height: 50vh;
 }
 .logb h1{
     color: black;
-    text-align: center;
+    font-size: 60px;
 }
 .logb a{
     font-size: 1.3rem;
     text-decoration: none;
     color: #EB3E32
+}
+@media only screen and (max-width: 550px) {
+    .logb h1{
+        font-size: 40px;
+    }
+    .logb a{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .logb h1{
+        font-size: 15px;
+    }
+    .logb{
+        height: 30vh;
+    }
 }
 
 .log{
@@ -41,6 +57,35 @@
 .logi button:hover{
     background-color: #EB3E32;
     transition: all 0.2s linear;
+}
+
+.shop h1{
+    font-size: 60px;
+}
+.shop a{
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #EB3E32
+}
+
+@media only screen and (max-width: 550px) {
+    .shop h1{
+        font-size: 40px;
+    }
+    .shop a{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .shop h1{
+        font-size: 25px;
+    }
+    .shop a{
+        font-size: 0.8rem;
+    }
+    .logb{
+        padding: 0;
+    }
 }
 .reg{
     display: flex;

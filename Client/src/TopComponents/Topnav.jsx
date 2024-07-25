@@ -5,11 +5,13 @@ import { FaPhoneAlt } from "react-icons/fa";
 // import { IoPersonSharp } from "react-icons/io5";
 import { Authcontext } from "../Context/AuthContext";
 // import { NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Topnav = () => {
-  const { auth, setauth } = useContext(Authcontext);
-  
+  const navigate = useNavigate()
+  const { auth } = useContext(Authcontext);
+  console.log(auth)
+ 
 
   return (
     <div className="container-fluid topnav">
@@ -38,10 +40,9 @@ const Topnav = () => {
             ) : (
               <>
             <Link className="tpp" to={`${auth?.user?.role===1?'/admin':'/account'}`}>
-                  {/* <IoPersonSharp style={{ color: "#EB3E32" }} />/ */}
-                  {auth?.user?.name} </Link>
-               
-              </>
+                  {auth?.user?.name} 
+                  </Link>
+                </>
             )}
           </div>
         </div>

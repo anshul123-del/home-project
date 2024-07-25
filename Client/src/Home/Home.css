@@ -13,6 +13,11 @@
     object-fit: cover;
 }
 
+@media only screen and (max-width: 550px) {
+    .car img{
+        height: 40vh;
+    }
+}
 #one {
     display: flex;
     color: white;

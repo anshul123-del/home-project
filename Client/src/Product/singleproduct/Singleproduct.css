@@ -1,3 +1,15 @@
+.spd{
+    background-image: url("../../images/black-brick.png");
+    height: 50vh;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 100%;
+}
+.spd h1{
+    color: white;
+}
+
+
 .paddd-5{
     padding: 30px 240px;
 }

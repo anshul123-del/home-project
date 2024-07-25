@@ -15,12 +15,11 @@ const Sideproduct = () => {
     const result1 = feat.filter((crr) => crr.brand === catitem);
     setproduct(result1);
   };
-
   return (
     <>
       <div className="container-fluid wishking text-center p-5">
         <div className="container  text-white pbt">
-          <div className="col-12 pour">
+          <div className="col-12 pour" data-aos="fade-down">
             <h1>PRODUCT PAGE</h1>
             <Link className="pat" to="/">
               HOME

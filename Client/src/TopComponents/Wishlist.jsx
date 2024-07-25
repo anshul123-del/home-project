@@ -21,10 +21,10 @@ const Wishlist = () => {
     <>
       <div className="container-fluid wishlis text-center p-5">
         <div className="container text-white p-5">
-          <div className="col-12 shopsy">
+          <div className="col-12 shopsy" data-aos="fade-down">
             <h1>WISHLIST</h1>
-            <Link to="/">HOME</Link>
-            <Link to="/wishlist">//WISHLIST</Link>
+            <Link to="/" className="ha">HOME</Link>
+            <Link to="/wishlist"  className="ha">//WISHLIST</Link>
           </div>
         </div>
       </div>

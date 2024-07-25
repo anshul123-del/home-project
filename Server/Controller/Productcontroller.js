@@ -9,11 +9,12 @@ const productcontroller = {
       const data = await Product.find();
       res.status(200).json({
         data: data,
-        message: "data fetched successfullly",
+        message: "data fetched successfullly",  
       });
     } catch (error) {
       res.status(500).json({
-        message: "server Problem",
+        message: error.message,
+        
       });
     }
   },

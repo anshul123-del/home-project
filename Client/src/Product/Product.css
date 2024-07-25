@@ -9,14 +9,17 @@
 .pbt {
     padding: 100px;
 }
-
+.pour h1 {
+    font-size: 60px;
+    color: black;
+}
 .pat {
     color: #EB3E32;
     text-decoration: none;
     font-size: 20px;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 550px) {
     .pbt {
         padding: 50px;
     }

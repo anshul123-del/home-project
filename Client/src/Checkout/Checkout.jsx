@@ -79,11 +79,9 @@ const Checkout = () => {
     const { value, name } = e.target
     setcheck({ ...check, [name]: value })
   }
-
   const handlesubmit = (e) => {
     e.preventDefault()
   }
-
   //MAkepayment
   const makepayment = async () => {
     const stripe = await loadStripe("pk_test_51OoTquSAtmHNt30iXuDuORAM20i3SVKdHGqc0ponW9d7g9weAvmAC4msaosXy3rCkWlwwVVJ6lmd6dov74NpvMiN00QRp94M72");
@@ -114,10 +112,10 @@ const Checkout = () => {
     }
   }
 
-    const handler = async(check)=>{
-        // await axios.post(`http://localhost:8050/order`,check)
-      console.log(check)
-    }
+  const handler = async (check) => {
+    // await axios.post(`http://localhost:8050/order`,check)
+    console.log(check)
+  }
 
   return (
     <>
@@ -339,12 +337,12 @@ const Checkout = () => {
                       {
                         carti.map((ele) => {
                           return (
-                
-                              <tr key={ele._id}>
-                                <td>{ele.slug}*{ele.quantity}</td>
-                                <td>&#36;{ele.price * ele.quantity}</td>
-                              </tr>
-                            
+
+                            <tr key={ele._id}>
+                              <td>{ele.slug}*{ele.quantity}</td>
+                              <td>&#36;{ele.price * ele.quantity}</td>
+                            </tr>
+
                           )
                         })
                       }

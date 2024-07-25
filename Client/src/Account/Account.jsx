@@ -7,8 +7,8 @@ const Account = () => {
 <>    
 <div className="container-fluid acce text-center p-5">
         <div className="container text-white p-5">
-          <div className="col-12 sho">
-            <h1>ACCOUNT PAGE</h1>
+          <div className="col-12 sho" data-aos="fade-down">
+            <h1 >ACCOUNT PAGE</h1>
             <Link to="/">HOME</Link>
             <Link to="/login">//ACCOUNT</Link>
           </div>

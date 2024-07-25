@@ -21,7 +21,7 @@ const CreateProduct = () => {
     setNewProduct((prevProduct) => ({
       ...prevProduct,
       image: file,
-    }));  
+    }));
   };
 
   const handleFormSubmit = async (e) => {
@@ -34,7 +34,6 @@ const CreateProduct = () => {
     formData.append('items_left', newproduct.items_left);
     formData.append('brand', newproduct.brand);
     formData.append('image', newproduct.image);
-
     try {
       const response = await axios.post(`${baseurl}/upload`, formData, {
         headers: {
@@ -94,7 +93,7 @@ const CreateProduct = () => {
           <Form.Control placeholder="Enter your Brand" name='brand' onChange={handleInputChange} value={newproduct.brand} />
         </Form.Group>
 
-        
+
         {/* Image upload field */}
         <Form.Group controlId="formGridImage">
           <Form.Label>Upload Product Photo</Form.Label>

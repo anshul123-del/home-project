@@ -10,6 +10,11 @@
     text-decoration: none;
     font-size: 1.5rem;
 }
+@media only screen and (max-width: 550px) {
+    .checkot a{
+        font-size: 1rem;
+    }
+}
 .shop{
     border: 0;
     height: 50px;

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../TopComponents/Top.css";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -12,34 +12,33 @@ const Login = () => {
 
   const { auth, setauth } = useContext(Authcontext);
   const navigate = useNavigate()
-  const[data,setdata]= useState({
-    email:"",
-    password:""
+  const [data, setdata] = useState({
+    email: "",
+    password: ""
   })
-  const handlechange = (e)=>{
-    const{value,name} = e.target
-    setdata({...data,[name]:value})
+  const handlechange = (e) => {
+    const { value, name } = e.target
+    setdata({ ...data, [name]: value })
   }
-  const handlesubmit = async(e)=>{
+  const handlesubmit = async (e) => {
     e.preventDefault()
-   const res =  await axios.post(`http://localhost:8050/log`,data)
+    const res = await axios.post(`http://localhost:8050/log`, data)
     setauth({
-      ...auth,  
+      ...auth,
       user: res.data.user,
     });
     console.log(auth)
     localStorage.setItem("auth", JSON.stringify(res.data));
     navigate("/")
     console.log(data)
-    
   }
   return (
     <>
-      <div className="container-fluid logb p-5">
-        <div className="container text-white p-5">
-          <div className="row justify-content-center">
-            <div className="col-12 shop">
-              <h1>LOGIN</h1>
+      <div className="container-fluid logb ">
+        <div className="container text-white  p-5">
+          <div className="row p-5 justify-content-center">
+            <div className="col-12 shop " data-aos="fade-down">
+              <h1 >LOGIN</h1>
               <Link to="/">HOME</Link>
               <Link to="/login">//LOGIN</Link>
             </div>
@@ -47,7 +46,7 @@ const Login = () => {
         </div>
       </div>
       <div className="container">
-        <div className="row my-5">
+        <div className="row my-3">
           <div className="col-12 text-center">
             <h1>LOGIN</h1>
           </div>
@@ -60,21 +59,21 @@ const Login = () => {
                     <Form.Control type="email" placeholder="Enter email" name="email" value={data.email} onChange={handlechange} />
                   </Form.Group>
                 </div>
-                <div className="col-12">               
-                     <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Password*</Form.Label>
-                  <Form.Control type="text" placeholder="Password" name="password" value={data.password} onChange={handlechange} />
-                </Form.Group>
+                <div className="col-12">
+                  <Form.Group as={Col} controlId="formGridPassword">
+                    <Form.Label>Password*</Form.Label>
+                    <Form.Control type="text" placeholder="Password" name="password" value={data.password} onChange={handlechange} />
+                  </Form.Group>
                 </div>
 
                 <div className="logi col-12  mt-4"><Button type="submit">
-                LOGIN
-              </Button>
-              </div> 
+                  LOGIN
+                </Button>
+                </div>
               </Row>
-           
+
             </Form>
-        
+
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ const Blog = () => {
 
             <div key={i.id} className="col-md-6 col-lg-4 col-sm-12 ">
               <div>
-              <div className='img-wrapper'>
+              <div className='img-wrapper mt-4'>
                   <img src={i.image} alt="" className='img-fluid inner-img' />
                   </div>
                   <div className='dis-blog'>

@@ -16,12 +16,27 @@
 }
 .abt h1{
     color: black;
+    font-size: 60px;
 }
 .abt a{
     font-size: 1.3rem;
     text-decoration: none;
     color: #EB3E32
 }
+@media only screen and (max-width: 550px) {
+    .abt h1{
+        font-size: 40px;
+    }
+    .abt a{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .abt h1{
+        font-size: 15px;
+    }
+}
+
 .img-wrapper {
     width: 100%;
     height: auto;

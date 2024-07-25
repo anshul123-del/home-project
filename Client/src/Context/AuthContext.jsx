@@ -16,7 +16,7 @@ const Authprovider = ({ children }) => {
         user: parsedata.user,
       });
       console.log(auth)
-    }
+    } 
     //eslint-disable-next-line
   }, []);
   return (

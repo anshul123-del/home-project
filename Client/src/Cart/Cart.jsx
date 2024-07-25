@@ -68,7 +68,6 @@ const Cart = () => {
       setcarti(ParsedArr)
     }
   }
-
   const ApplyCoupon = async () => {
     const data = await axios.post("http://localhost:8050/coupon/getcoupon", {CouponCode: coupon })
     setDiscountval(data.data[0].discountvalue)
@@ -81,8 +80,8 @@ const Cart = () => {
     <>
       <div className="container-fluid carti text-center p-5">
         <div className="container text-white p-5">
-          <div className="col-12 sho">
-            <h1>SHOPPING CART</h1>
+          <div className="col-12 sho" data-aos="fade-down">
+            <h1 data-aos="fade-down" className="scc">SHOPPING CART</h1>
             <Link to="/">HOME</Link>
             <Link to="/wishlist">//CART</Link>
           </div>
@@ -222,7 +221,7 @@ const Cart = () => {
               <Link>UPDATE CART</Link>
             </h6>
           </div>
-          <div className="col-lg-4 coupon my-3">
+          {/* <div className="col-lg-4 coupon my-3">
             <h5>Coupon Code</h5>
             <p className="my-3">Enter your coupon code if you have one.</p>
             <div className="text-center ">
@@ -237,7 +236,7 @@ const Cart = () => {
                 ApplyCoupon()
               }}>APPLY COUPON</button>
             </h6>
-          </div>
+          </div> */}
 
           {/* CARD-TOTAL */}
           <div className="col-lg-4 cardtotal">

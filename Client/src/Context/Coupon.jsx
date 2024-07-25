@@ -18,7 +18,6 @@ const CouponProvider = ({ children }) => {
     }, [])
 
 
-
     return <CouponContext.Provider value={{ baseurl }}>
         {children}
     </CouponContext.Provider>

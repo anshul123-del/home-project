@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Tabu from "./TopComponents/Tabu";
 import Footerr from "./TopComponents/Footerr";
 import "react-multi-carousel/lib/styles.css";
-
 import Home from "./Home/Home";
 import Wishlist from "./TopComponents/Wishlist";
 import Cart from "./Cart/Cart";
@@ -41,6 +40,7 @@ import CreateProduct from "./Dashboard/CreateProduct";
 import Success from "./Checkout/Success";
 import Cancel from "./Checkout/Cancel";
 import CreateCoupon from "./Coupon/CreateCoupon";
+import Protected from "./Protected/Protected";
 // import Addtocart from "./Cart/Addtocart";
 // import Productlisting from "./Product/Productlisting";
 function App() {
@@ -99,7 +99,7 @@ function App() {
 
 
           {/* Admin */}
-          <Route path="/Admin" element={<AdminDashboard />}>
+          <Route path="/Admin" element={<Protected Component = {AdminDashboard}/>}>
             <Route path="" element={<Allusers />}></Route>
             <Route path="dashboard" element={<Allusers />}></Route>
             <Route path="grid" element={<ProductGrid />}></Route>
@@ -112,6 +112,8 @@ function App() {
           </Route>
           {/* Creating-Coupon */}
           <Route path="/Coupon" element={<CreateCoupon />}></Route>
+
+          <Route path="*" element={<Pagenot/>}></Route>
         </Routes>
 
         <Footerr />

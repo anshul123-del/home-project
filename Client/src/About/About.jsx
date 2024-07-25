@@ -11,9 +11,9 @@ const Aboutus = () => {
     <>
       <div className="container-fluid abt text-center p-5">
         <div className="container text-white  abt2">
-          <div className="col-12 ">
-            <h1 >ABOUT US</h1>
-            <Link to="/">HOME</Link>
+          <div className="col-12 " data-aos="fade-down" >
+            <h1>ABOUT US</h1>
+            <Link to="/" style={{color:"black"}}>HOME</Link>
             <Link to="/wishlist">//ABOUT US</Link>
           </div>
         </div>

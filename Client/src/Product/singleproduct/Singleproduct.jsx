@@ -78,7 +78,17 @@ const Singleproduct = () => {
   return (
     <div>
       <div>
-        <div className="container">
+        
+          <div className="container-fluid">
+          <div className="row spd">
+              <div className="col-12 text center">
+                  <h1>PRODUCT DETAILS</h1>
+                  <div><Link>HOME</Link></div>
+                 <div><Link>//PRODUCT DETAILS</Link></div>  
+              </div>
+       
+          </div>
+          <div className="container">
           <div className="row">
             <div className="col-lg-6">
               <div className="p-2 mt-4">
@@ -125,6 +135,7 @@ const Singleproduct = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         <div className="container">

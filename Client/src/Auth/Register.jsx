@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../TopComponents/Top.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -15,7 +15,9 @@ const Register = () => {
     email: "",
     password: "",
   });
-    const handlechange = (e)=>{
+  
+  const navigate = useNavigate()
+  const handlechange = (e)=>{
         const{value,name} = e.target
         setdata({...data,[name]:value})
     }
@@ -31,7 +33,7 @@ const Register = () => {
       <div className="container-fluid logb  p-5">
         <div className="container text-white p-5">
           <div className="row justify-content-center">
-            <div className="col-12 shop ">
+            <div className="col-12 shop " data-aos="fade-down">
               <h1>REGISTER</h1>
               <Link to="/">HOME</Link>
               <Link to="/register">//REGISTER</Link>
@@ -67,7 +69,7 @@ const Register = () => {
                 </div>
 
                 <div className="logi col-12  mt-4">
-                  <button type="submit">REGISTER</button>
+                  <button type="submit" onClick={()=>{navigate("/")}}>REGISTER</button>
                 </div>
               </Row>
             </Form>

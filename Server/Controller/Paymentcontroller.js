@@ -1,5 +1,4 @@
 const stripe = require("stripe")("sk_test_51OoTquSAtmHNt30iK1bOy8YsI65hhcoeAJNoC0hnO5SDrJwF1mq3wLfn47WiErcSPJb6F8zljSJQJu0cVyBfskks00pjbuKCk5");
-
 const PaymentController = {
     makepayment: async (req, res) => {
         const { products } = req.body;
@@ -55,7 +54,6 @@ const PaymentController = {
                 success_url: "http://localhost:5173/success",
                 cancel_url: "http://localhost:5173/cancel"
             });
-
             res.status(200).json({
                 id: session.id
             });

@@ -4,7 +4,22 @@
     background-attachment: scroll;
 
 }
-
+.sho h1{
+    font-size: 60px;
+}.sho a{
+    font-size: 1.3rem;
+    color: #EB3E32;
+    text-decoration: none;
+}
+@media only screen and (max-width: 550px) {
+    .sho a{
+        font-size: 1rem;
+    }
+    .sho h1{
+        font-size: 25px;
+    }
+}
+.sho
 .acce a {
     color: #EB3E32;
     ;
